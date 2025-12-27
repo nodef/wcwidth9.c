@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
-URL="https://excellmedia.dl.sourceforge.net/project/asio/asio/1.36.0%20%28Stable%29/boost_asio_1_36_0.zip?viasf=1"
-ZIP="${URL##*/}"
-ZIP="${ZIP%%\?*}"
-DIR="${ZIP%.zip}"
-mkdir -p .build
-cd .build
+# Fetch the latest version of the library
+fetch() {
+if [ -f "wcwidth9.h" ]; then return; fi
+URL="https://github.com/joshuarubin/wcwidth9/raw/refs/heads/master/wcwidth9.h"
+FILE="wcwidth9.h"
 
 # Download the release
-if [ ! -f "$ZIP" ]; then
-  echo "Downloading $ZIP from $URL ..."
-  curl -L "$URL" -o "$ZIP"
-  echo ""
-fi
-
-# Unzip the release
-if [ ! -d "$DIR" ]; then
-  echo "Unzipping $ZIP to .build/$DIR ..."
-  cp "$ZIP" "$ZIP.bak"
-  unzip -q "$ZIP"
-  rm "$ZIP"
-  mv "$ZIP.bak" "$ZIP"
-  echo ""
-fi
-
-# Copy the libs to the package directory
-echo "Copying libs to boost/ ..."
-rm -rf ../boost
-mkdir -p ../boost
-cp -rf "$DIR/boost"/* ../boost/
+echo "Downloading $FILE from $URL ..."
+curl -L "$URL" -o "$FILE"
 echo ""
+}
+
+
+# Test the project
+test() {
+echo "Running 01-basic-usage.c ..."
+clang -I. -o 01.exe examples/01-basic-usage.c  && ./01.exe && echo -e "\n"
+echo "Running 02-east-asian-context.c ..."
+clang -I. -o 02.exe examples/02-east-asian-context.c    && ./02.exe && echo -e "\n"
+echo "Running 03-custom-context.c ..."
+clang -I. -o 03.exe examples/03-custom-context.c  && ./03.exe && echo -e "\n"
+}
+
+
+# Main script
+if [[ "$1" == "test" ]]; then test
+elif [[ "$1" == "fetch" ]]; then fetch
+else echo "Usage: $0 {fetch|test}"; fi

@@ -1,9 +1,6 @@
-# Library files
-wcwidth9
-wcwidth9.h
-
-# Build directory
+# Build artifacts
 .build/
+*.exe
 
 # Logs
 logs

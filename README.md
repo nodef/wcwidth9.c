@@ -28,19 +28,47 @@ As private-use characters may not necessarily need to vary depending on East Asi
 ## Installation
 
 Run:
-```bash
+
+```sh
 $ npm i wcwidth9.c
 ```
 
 And then include `wcwidth9.h` as follows:
+
 ```c
+// main.c
 #include "node_modules/wcwidth9.c/wcwidth9.h"
+
+int main() { /* ... */ }
+```
+
+And then compile with `clang` or `gcc` as usual.
+
+```bash
+$ clang main.c  # or, use gcc
+$ gcc   main.c
+```
+
+You may also use a simpler approach:
+
+```c
+// main.c
+#include <wcwidth9.h>
+
+int main() { /* ... */ }
+```
+
+If you add the path `node_modules/wcwidth9.c` to your compiler's include paths.
+
+```bash
+$ clang -I./node_modules/wcwidth9.c main.c  # or, use gcc
+$ gcc   -I./node_modules/wcwidth9.c main.c
 ```
 
 <br>
 <br>
 
 
+[![SRC](https://img.shields.io/badge/src-repo-green?logo=Org)](https://github.com/joshuarubin/wcwidth9)
 [![ORG](https://img.shields.io/badge/org-nodef-green?logo=Org)](https://nodef.github.io)
 ![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/wcwidth9.c)
-[![SRC](https://img.shields.io/badge/src-repo-green?logo=Org)](https://github.com/joshuarubin/wcwidth9)
