@@ -1,6 +1,6 @@
 {
   "name": "wcwidth9.c",
-  "version": "1.2017.6",
+  "version": "1.2017.7",
   "description": "Platform independent, header only, wcwidth with full unicode 9 support; Joshua Rubin (2016).",
   "keywords": [
     "c",
